@@ -1,10 +1,18 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-require('./db');
+// const mongoose = require("mongoose");
+require("./db");
+
+const dotenv = require("dotenv");
+dotenv.config();
 
 
+app.use(express.json());
 
+const authRoutes = require("./routes/authRoutes");
 
-app.listen(6000, (req,res)=>{
-    console.log("server is listening on PORT 6000");
-})
+app.use("/api/auth", authRoutes);
+
+app.listen(6000, () => {
+  console.log("server is listening on PORT 6000");
+});
